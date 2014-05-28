@@ -11,18 +11,39 @@
         {
             "name":                     "Luke Scowen",
             "email":                    "lmscowen@gmail.com",
+            "homepage":                     "http://mynameis.zande.rs/",
             "role":                     "Developer"
         }
     ],
 
-    "minimum-stability": "dev",
+    "minimum-stability":                    "dev",
 
     "config": {
-        "vendor-dir":                   "assets/vendor"
+        "vendor-dir":                       "application/vendor"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "application":                  ""
+        }
     },
 
     "require": {
-        "twbs/bootstrap":                   "3.1.*"
-    }
+        "yiisoft/yii":                      "1.1.14",
+        "symfony/options-resolver":         "2.4.*",
+        "yohang/calendr":                   "dev-master",
+        "twbs/bootstrap":                   "3.1.*",
+        "eternicode/bootstrap-datepicker":  "1.3.*",
 
+        "nesbot/Carbon":                    "1.8.*",
+        "guzzlehttp/guzzle":                "4.0.*",
+        "symfony/config":                   "2.4.*",
+        "kzykhys/ciconia":                  "1.0.*",
+
+        "php":                              ">=5.3.9"
+    },
+    "require-dev": {
+        "raven/raven":                      "0.8.*",
+        "fzaninotto/faker":                 "1.3.*"
+    }
 }

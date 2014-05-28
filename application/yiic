@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php
+
+defined('ENVIRONMENT') || define('ENVIRONMENT', 'develop');
+require_once(dirname(__FILE__).'/yiic.php');

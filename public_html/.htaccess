@@ -1,0 +1,10 @@
+Options +FollowSymLinks
+
+<IfModule mod_rewrite.c>
+    IndexIgnore */*
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} -l
+    RewriteRule ^.*$ - [NC,L]
+    RewriteRule ^.*$ index.php [NC,L]
+</IfModule>

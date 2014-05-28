@@ -1,0 +1,15 @@
+# Editor (Sublime Text)
+*.sublime-workspace
+*.sublime-project
+
+# Composer
+composer.phar
+composer.lock
+
+# Composer Components
+/components/
+
+# Application
+/application/config/databases.php
+/application/config/hosts.php
+/application/config/.environment
