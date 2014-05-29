@@ -5,9 +5,10 @@ This project's purpose is to help with a friends party where bets are taken on t
 
 Follow these steps to successfully migrate and merge, from scratch (using Git Bash):  
 
-1. composer update
-2. mysql -u root
-3. create database ascot;
+1. cd <path to directory>
+2. composer update
+3. mysql -u root
+4. create database ascot;
 5. exit;
 6. cd <path to project>
 7. ./application/yiic migrate
