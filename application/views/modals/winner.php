@@ -34,6 +34,7 @@
 <script>
 $(document).ready( function(){
     $('#winner').modal({
+        show: false,
         backdrop: 'static',
         keyboard: false,
     })
