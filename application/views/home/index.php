@@ -31,7 +31,7 @@ $race = \application\components\CurrentRace::get();
         ?>
         <h4>No Winners this race, the pot has been carried over!</h4>
     <?php else: ?>
-        <h4>Split: <strong>&pound;<?php echo number_format(count($bets) + $race->extra / count($winners), 2); ?></strong></h4>
+        <h4>Split: <strong>&pound;<?php echo number_format( (count($bets) + $race->extra) / count($winners), 2); ?></strong></h4>
         <h4>Winners:</h4>
         <table class="table table-condensed">
             <tbody>
