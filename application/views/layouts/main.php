@@ -39,7 +39,7 @@
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-    
+
         <style type="text-css">
 
         </style>
@@ -47,10 +47,10 @@
 
     <body>
 
-        <?php $this->renderPartial('//modals/winner'); ?> 
+        <?php $this->renderPartial('//modals/winner'); ?>
 
         <div class="row">
-            <div class="col-sm-3" style="margin-top:5px; margin-left:5px;">
+            <div class="col-sm-4" style="margin-top:5px; margin-left:5px;">
                 <!-- Single button -->
                 <div class="btn-group">
                     <button type="button" class="btn btn-default btn-md dropdown-toggle" data-toggle="dropdown">
@@ -62,7 +62,7 @@
                         <li><?php echo CHtml::link('<i class="glyphicon glyphicon-trash"></i> <div class="pull-right">Clear Bets</div>', array('/home?clear'), array()); ?></li>
                     </ul>
                 </div>
-            
+
                 <?php
                 $races = '<table class="table table-condensed"><tr><th>Name</th> <th>Time</th></tr>';
                 foreach(\application\models\db\Races::model()->findAll() as $race){
@@ -74,7 +74,7 @@
                         $races .= '<td>';
 
                             $races .= Yii::app()->dateFormatter->formatDateTime($race->start, null, 'short');
-                            if($race->end) 
+                            if($race->end)
                                 $races .= ' <i class="glyphicon glyphicon-arrow-right"></i> ' . Yii::app()->dateFormatter->formatDateTime($race->end, null, 'short');
                         $races .= '</td>';
                     $races .= '</tr>';
@@ -83,16 +83,16 @@
                 ?>
                 <?php echo CHtml::link('Races', '', array('class' => 'btn btn-md btn-primary pop', 'data-trigger' => 'hover', 'data-placement' => 'bottom', 'data-toggle' => 'popover', 'data-html' => 'true', 'data-content' => $races, 'role' => 'button', 'style' => 'cursor:pointer;')); ?>
             </div>
-            <div class="col-sm-5 text-center">
+            <div class="col-sm-3 text-center">
                 <?php echo CHtml::image($assetUrl . '/images/banner.png', 'Herbert Racing', array( )); ?>
             </div>
 
-            <div class="col-sm-3 pull-right" style="margin-top:15px">
+            <div class="col-sm-4 pull-right" style="margin-top:15px">
                 <?php $currentRace = \application\components\CurrentRace::get(); ?>
-                Taking bets for: <strong><?php echo CHtml::encode($currentRace->name); ?></strong> 
-                (<?php echo Yii::app()->dateFormatter->formatDateTime($currentRace->start, null, 'short'); ?> 
+                Taking bets for: <strong><?php echo CHtml::encode($currentRace->name); ?></strong>
+                (<?php echo Yii::app()->dateFormatter->formatDateTime($currentRace->start, null, 'short'); ?>
                 <?php if($currentRace->end) echo ' <i class="glyphicon glyphicon-arrow-right"></i> ' . Yii::app()->dateFormatter->formatDateTime($currentRace->end, null, 'short'); ?>)
-            
+
                 <?php if(!$currentRace->winner && time() > $currentRace->end): ?>
                     <br /><span class="bg-warning text-warning"><strong>This race is over, determine a winner!</strong></span>
                 <?php endif; ?>

@@ -2,8 +2,21 @@
 $race = \application\components\CurrentRace::get();
 ?>
 
+<?php if(isset($_GET['delete'])): ?>
+    <?php
+    // Check if the bet exists
+    $bet = $_GET['delete'];
+    $bet = \application\models\db\Bets::model()->findByPk($bet);
+    if($bet){
+        $bet->delete();
+    }
+    Yii::app()->user->setFlash('success', 'The bet has been deleted!');
+    $this->redirect(array('/home'));
+    ?>
+<?php return; endif; ?>
+
 <?php if(isset($_GET['clear'])): ?>
-    <?php 
+    <?php
     $bets = \application\models\db\Bets::model()->findAllByAttributes(array('race' => $race->id), array('order' => 'name ASC'));
     foreach($bets as $bet){
         $bet->delete();
@@ -22,7 +35,7 @@ $race = \application\components\CurrentRace::get();
     ?>
     <h4>Pot: <strong>&pound;<?php echo count($bets) + $race->extra; ?></strong></h4>
     <?php if(!$winners || ($winners && count($winners) <= 0)): ?>
-        <?php 
+        <?php
         $nextRace = \application\models\db\Races::model()->findByPk( ($race->id + 1) );
         if($nextRace){
             $nextRace->extra = count($bets) + $race->extra;
@@ -62,7 +75,7 @@ $race = \application\components\CurrentRace::get();
     $newBet->save();
 
     Yii::app()->user->setFlash('success', "<strong>Success!</strong> $name has placed a bet on horse #$horse.");
-    ?>  
+    ?>
 <?php endif; ?>
 
 
@@ -91,7 +104,7 @@ $(document).ready( function(){
         <input type="text" name="playername" autofocus="true" placeholder="Enter a Name..." id="inputPlayerName" class="form-control input-lg pop" data-trigger="focus" data-placement="top" data-toggle="popover" data-html="true" data-content="The person making the bet" role="input">
     </div>
     <div class="col-sm-2">
-        <input type="text" name="horse" placeholder="#" id="inputHorse" class="form-control input-lg text-center pop" data-trigger="focus" data-placement="top" data-toggle="popover" data-html="true" data-content="The Horse Number" role="input">
+        <input type="text" name="horse" placeholder="Horse #" id="inputHorse" class="form-control input-lg text-center pop" data-trigger="focus" data-placement="top" data-toggle="popover" data-html="true" data-content="The Horse Number" role="input">
     </div>
 
     <div class="col-sm-2 hidden">
@@ -120,6 +133,12 @@ $(document).ready( function(){
         $("#linkPlace").click( function(){
             update();
         })
+
+        $("#inputPlayerName, #inputHorse").keydown(function( event ) {
+            if ( event.which == 13 ) {
+                update();
+            }
+        });
 
         function update(){
             var betName = $("#inputPlayerName").val();
@@ -155,7 +174,7 @@ $(document).ready( function(){
                     <th>N.O Bets</th>
                 </thead>
                 <tbody>
-                    <?php 
+                    <?php
                     $sql = 'SELECT * FROM `bets` WHERE `bets`.`race` = :race GROUP BY `bets`.`horse` ORDER BY `bets`.`horse`';
                     $bets = \application\models\db\Bets::model()->findAllBySql($sql, array(':race' => $race->id));
 
@@ -167,6 +186,9 @@ $(document).ready( function(){
                             <td><?php echo count($betsOnHorse); ?></td>
                         </tr>
                         <?php
+                    }
+                    if(!$bets){
+                        echo '<tr class="warning text-warning text-center"><td colspan="100%">No Bets Placed</td></tr>';
                     }
                     ?>
                 </tbody>
@@ -184,6 +206,7 @@ $(document).ready( function(){
                     <tr>
                         <th>Person</th>
                         <th>Horse</th>
+                        <th class="text-right"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -192,8 +215,14 @@ $(document).ready( function(){
                         <tr>
                             <td><?php echo $bet->name ?></td>
                             <td>#<?php echo $bet->horse; ?></td>
+                            <td class="text-right"><?php echo CHtml::link('<span class="glyphicon glyphicon-trash"></span>', array('/home', 'delete' => $bet->id), array('class' => 'btn btn-xs btn-primary')); ?>
                         </tr>
                     <?php endforeach; ?>
+                    <?php
+                    if(!$bets){
+                        echo '<tr class="warning text-warning text-center"><td colspan="100%">No Bets Placed</td></tr>';
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -205,24 +234,31 @@ $(document).ready( function(){
                 Current Race Statistics
             </div>
             <div class="panel-body">
+
+                <?php if($race->extra): ?>
+                    <div class="row">
+                        <div class="col-sm-12 text-success text-center"><strong>ROLLOVER!</strong></div>
+                    </div>
+                <?php endif; ?>
+
                 <div class="row">
-                    <div class="col-sm-6">Pot:</div>
-                    <div id="pot" class="col-sm-6 text-right"><strong>&pound;<?php echo count($bets) + $race->extra ?></strong></div>
+                    <div class="col-sm-3">Pot:</div>
+                    <div id="pot" class="col-sm-9 text-right"><strong>&pound;<?php echo count($bets) + $race->extra ?></strong></div>
                 </div>
-                
+
                 <div class="row">
-                    <div class="col-sm-6">Race:</div>
-                    <div class="col-sm-6 text-right"><strong><?php echo $race->name; ?></strong></div>
+                    <div class="col-sm-3">Race:</div>
+                    <div class="col-sm-9 text-right"><strong><?php echo $race->name; ?></strong></div>
                 </div>
-                
+
                 <div class="row">
-                    <div class="col-sm-6">Start:</div>
-                    <div class="col-sm-6 text-right"><strong><?php echo Yii::app()->dateFormatter->formatDateTime($race->start, null, 'short'); ?></strong></div>
+                    <div class="col-sm-3">Start:</div>
+                    <div class="col-sm-9 text-right"><strong><?php echo Yii::app()->dateFormatter->formatDateTime($race->start, null, 'short'); ?></strong></div>
                 </div>
-                
+
                 <div class="row">
-                    <div class="col-sm-6">End:</div>
-                    <div class="col-sm-6 text-right"><strong><?php echo Yii::app()->dateFormatter->formatDateTime($race->end, null, 'short'); ?></strong></div>
+                    <div class="col-sm-3">End:</div>
+                    <div class="col-sm-9 text-right"><strong><?php echo Yii::app()->dateFormatter->formatDateTime($race->end, null, 'short'); ?></strong></div>
                 </div>
             </div>
         </div>
