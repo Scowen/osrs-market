@@ -1,5 +1,7 @@
 # Ascot Racing
-This project's purpose is to help with a friends party where bets are taken on the horses at the Ascot races on Saturday 21st June 2014. 
+This project's purpose is to help with a friends party where bets are taken on the horses at the Ascot races on Saturday 21st June 2014.   
+
+This project is mainly written in PHP using the Yii Framework. It also utilizes Twitters Bootstrap for the frontend.
 
 ## Database Merge & Migration
 
