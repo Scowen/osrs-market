@@ -66,15 +66,22 @@ $race = \application\components\CurrentRace::get();
     $horse = $_GET['horse'];
     $quantity = $_GET['quantity'];
 
-    $newBet = new \application\models\db\Bets;
-    $newBet->name = $name;
-    $newBet->horse = $horse;
-    $newBet->quantity = $quantity;
-    $newBet->race = $race->id;
-    $newBet->created = time();
-    $newBet->save();
+    $bet = \application\models\db\Bets::model()->findByAttributes(array(
+        'name' => $name,
+    ));
+    if(!$bet){
+        $newBet = new \application\models\db\Bets;
+        $newBet->name = $name;
+        $newBet->horse = $horse;
+        $newBet->quantity = $quantity;
+        $newBet->race = $race->id;
+        $newBet->created = time();
+        $newBet->save();
 
-    Yii::app()->user->setFlash('success', "<strong>Success!</strong> $name has placed a bet on horse #$horse.");
+        Yii::app()->user->setFlash('success', "<strong>Success!</strong> $name has placed a bet on horse #$horse.");
+    } else {
+        Yii::app()->user->SetFlash('danger', "<strong>Error!</strong> $name has already bet on horse #$horse");
+    }
     ?>
 <?php endif; ?>
 
@@ -93,6 +100,28 @@ $(document).ready( function(){
     window.history.pushState("object or string", "Title", baseUrl + "/home");
     setTimeout(function(){
         $('#success').fadeOut();
+        $("#formBetArea").attr("class","row");
+    }, 4000);
+})
+</script>
+<?php endif; ?>
+
+<?php if(Yii::app()->user->hasFlash('danger')): ?>
+<div class="row">
+    <div class="col-sm-10" id="danger">
+        <div class="alert alert-danger">
+            <?php echo Yii::app()->user->getFlash('danger');?>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready( function(){
+    $("#formBetArea").attr("class","row has-error");
+
+    window.history.pushState("object or string", "Title", baseUrl + "/home");
+    setTimeout(function(){
+        $('#danger').fadeOut();
+        $("#formBetArea").attr("class","row");
     }, 4000);
 })
 </script>
