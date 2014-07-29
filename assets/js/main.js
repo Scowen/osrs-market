@@ -1,5 +1,5 @@
 $(document).ready( function(){
 
-	// JQuery goes here.
+    // JQuery goes here
 
 })

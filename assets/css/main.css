@@ -75,8 +75,6 @@ a:hover {
     -webkit-font-smoothing: antialiased;
     text-transform: uppercase;
     color: #888;
-}
-.navigation .link:hover {
-    color: #FFF;
     cursor: pointer;
+    color: #888;
 }
