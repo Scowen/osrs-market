@@ -1,0 +1,82 @@
+a:active {
+    color: #000;
+}
+a:hover {
+    color: #000;
+}
+
+/* Custom Font Families {FONT} */
+.font-ubuntu {
+    font-family: 'Ubuntu', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.font-raleway {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Bootstrap Addons {BS} */
+.text-dark {
+    color: #363635;
+}
+.text-light {
+    color: #ececec;
+}
+.bg-dark {
+    background: #363635;
+}
+.bg-light {
+    background: #ececec;
+}
+.line {
+    width: 100%;
+}
+.line.line-thin {
+    height: 1px;
+}
+.line.line-thick {
+    height: 3px;
+}
+
+/* CSS for circles {CIR} */
+.circle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+    text-align: center;
+    font-size: 50px;
+    padding-top: 20px;
+    padding-left: 2px;
+}
+.circle.circle-hover {
+    width: 100px;
+    height: 100px;
+    background: #363635;
+    color: #ececec;
+}
+.circle.circle-hover:hover {
+    width: 100px;
+    height: 100px;
+    background: #50504f;
+    color: #ececec;
+    cursor: pointer;
+}
+
+/* Navigation CSS {NAV} */
+.navigation {
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 80px;
+    overflow-y: hidden;
+    background: #333
+}
+.navigation .link {
+    padding-top: 30px;
+    font-family: 'Raleway', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-transform: uppercase;
+    color: #888;
+}
+.navigation .link:hover {
+    color: #FFF;
+    cursor: pointer;
+}

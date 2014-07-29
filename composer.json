@@ -1,0 +1,28 @@
+{
+    "name":             "OSRS-Market",
+    "description":      "www.osrs-market.com - Statistics for old school runescape prices",
+    "keywords":         ["credit", "application", "yii", "management", "debt"],
+    "type":             "project",
+    "homepage":         "https://github.com/scowen/osrs-market",
+    "license":          "MIT",
+    "version":          "0.0.0",
+
+    "authors": [
+        {
+            "name":                     "Luke Scowen",
+            "email":                    "lmscowen@gmail.com",
+            "role":                     "Developer"
+        }
+    ],
+
+    "minimum-stability": "dev",
+
+    "config": {
+        "vendor-dir":                   "assets/vendor"
+    },
+
+    "require": {
+        "twbs/bootstrap":                   "3.1.*"
+    }
+
+}
