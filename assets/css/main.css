@@ -1,3 +1,9 @@
+body {
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
 a:active {
     color: #000;
 }
@@ -12,14 +18,41 @@ a:hover {
 }
 .font-raleway {
     font-family: 'Raleway', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.font-opensans {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Bootstrap Addons {BS} */
+.text-small {
+    font-size: 0.5em;
+}
+.text-large {
+    font-size: 3em;
+}
+.text-extra-large {
+    font-size: 5em;
+}
+.carousel-caption .carousel-text-free {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
 .text-dark {
     color: #363635;
 }
+.text-very-dark {
+    color: #111;
+}
 .text-light {
     color: #ececec;
+}
+.text-very-light {
+    color: #c2c2c2;
 }
 .bg-dark {
     background: #363635;
@@ -36,6 +69,20 @@ a:hover {
 .line.line-thick {
     height: 3px;
 }
+.text-shadow-dark {
+    text-shadow: 2px 2px #222;
+}
+.text-shadow-light {
+    text-shadow: 2px 2px #888;
+}
+.text-caption-small {
+    font-size: 1.5em;
+    padding-top: 8px;
+}
+.hidden {
+    display: none;
+}
+
 
 /* CSS for circles {CIR} */
 .circle {
@@ -66,8 +113,7 @@ a:hover {
     top: 0;
     left: 0;
     height: 80px;
-    overflow-y: hidden;
-    background: #333
+    background: #444;
 }
 .navigation .link {
     padding-top: 30px;

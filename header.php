@@ -20,19 +20,25 @@
         <!-- Import Google Fonts -->
         <link  href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
         <link  href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
         <title>
             OSRS Market - Price Statistics and More!
         </title>
     </head>
     <body>
-        <div class="navigation text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4 link">Link</div>
-                    <div class="col-sm-4">OSRS Market</div>
-                    <div class="col-sm-4 link">Link</div>
+        <div style="position: absolute; top:0; left:0; width:100%;">
+            <div class="navigation">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 text-center link">Link</div>
+                        <div class="col-sm-4 text-center">
+                            <center>
+                                <img src="assets/images/logo.png" class="img-responsive" alt="Logo">
+                            </center>
+                        </div>
+                        <div class="col-sm-4 text-center link">Link</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
