@@ -13,3 +13,4 @@ composer.lock
 /application/config/databases.php
 /application/config/hosts.php
 /application/config/.environment
+/application/vendor/
