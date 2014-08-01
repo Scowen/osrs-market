@@ -6,7 +6,7 @@
     use \CException as Exception;
     use \CEvent as Event;
     USE \CDbCriteria as Criteria;
-    use \application\models\db\user\User;
+    use \application\models\db\User;
     use \application\models\db\user\FailedLogin;
     use \application\components\user\UserInterface;
 

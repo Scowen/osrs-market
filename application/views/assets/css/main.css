@@ -11,6 +11,11 @@ a:hover {
     color: #000;
 }
 
+.logo {
+    text-align: center;
+    padding: 1px;
+}
+
 /* Custom Font Families {FONT} */
 .font-ubuntu {
     font-family: 'Ubuntu', sans-serif;
@@ -136,6 +141,22 @@ a:hover {
     color: #888;
     cursor: pointer;
     color: #888;
+    padding-bottom: 26px;
+    text-align: center;
+}
+
+.navigation .link:hover {
+    border-bottom: 3px solid #888;
+    color: #FFF;
+}
+
+.navigation .link a {
+    color: #888;
+}
+
+.navigation .link a:hover {
+    color: #999;
+    text-decoration: none;
 }
 
 /* Some items from osrs */
@@ -145,4 +166,15 @@ a:hover {
     height: 288px;
     width: 173px;
     margin: auto;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    width: 100%;
+    padding: 3px;
+    background: #DDD;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    color: #222;
 }

@@ -38,22 +38,78 @@
     </head>
     <body>
         <div style="position: absolute; top:0; left:0; width:100%;">
-            <div class="navigation hidden-xs">
+            <div class="navigation">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-4 text-center link hidden-xs">Link</div>
-                        <div class="col-sm-4 text-center">
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <?php echo CHtml::link('<div class="col-sm-4 link hidden-xs">Rising</div>', array('/stats/rising')); ?>
+                                <?php echo CHtml::link('<div class="col-sm-4 link hidden-xs">Falling</div>', array('/stats/falling')); ?>
+                                <?php echo CHtml::link('<div class="col-sm-4 link hidden-xs">Merchant</div>', array('/stats/merchant')); ?>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 logo">
                             <center>
-                                <img src="<?php echo $assetUrl; ?>/images/logo.png" class="img-responsive" alt="Logo">
+                                <?php echo CHtml::link(
+                                CHtml::image($assetUrl . '/images/logo.png', 'Logo', array('class' => 'img-responsive')), 
+                                Yii::app()->user->getReturnUrl(Yii::app()->homeUrl), 
+                                array()); 
+                                ?>
                             </center>
                         </div>
-                        <div class="col-sm-4 text-center link hidden-xs">Link</div>
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <?php echo CHtml::link('<div class="col-sm-4 link hidden-xs">Pro</div>', array('/account/pro')); ?>
+                                <?php echo CHtml::link('<div class="col-sm-4 link hidden-xs">Register</div>', array('/account/register')); ?>
+                                <?php echo CHtml::link('<div class="col-sm-4 link hidden-xs">Login</div>', array('/login')); ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <?php if(!($this->id == "home" && $this->action->id == "index")): ?>
+                <?php if($this->breadcrumbs): ?>
+                    <div class="breadcrumbs">
+                        <div class="container">
+                            <?php
+                            $this->widget('zii.widgets.CBreadcrumbs', array(
+                                'links' => $this->breadcrumbs,
+                            ));
+                            ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <div class="container">
+                    <br />
+            <?php endif; ?>
+
+            <?php if(Yii::app()->user->hasFlash("success")): ?>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <strong>Hell Yeah!</strong>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::app()->user->getFlash("success"); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if(Yii::app()->user->hasFlash("danger")): ?>
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <strong>Hold Up!</strong>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::app()->user->getFlash("danger"); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if(Yii::app()->user->hasFlash("warning")): ?>
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <strong>Wait a second!</strong>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo Yii::app()->user->getFlash("warning"); ?>
+                </div>
+            <?php endif; ?>
 
             <?php echo $content; ?>
             <div class="clear"></div>
+
+            <?php if(!($this->id == "home" && $this->action->id == "index")): ?>
+                </div>
+            <?php endif; ?>
         </div>
     </body>
 </html>

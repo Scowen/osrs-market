@@ -1,10 +1,15 @@
 Options +FollowSymLinks
+IndexIgnore */*
 
 <IfModule mod_rewrite.c>
-    IndexIgnore */*
-    RewriteEngine on
-    RewriteCond %{REQUEST_FILENAME} -s [OR]
-    RewriteCond %{REQUEST_FILENAME} -l
-    RewriteRule ^.*$ - [NC,L]
-    RewriteRule ^.*$ index.php [NC,L]
+  RewriteEngine on
+
+  #RewriteBase /
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  RewriteRule ^.*$ /projects/osrs-market/public_html/index.php
 </IfModule>
+
+ErrorDocument 500 "<h2>Application error</h2>Yii application failed to start properly"

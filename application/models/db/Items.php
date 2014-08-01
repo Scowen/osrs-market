@@ -4,28 +4,34 @@
 
     use \Yii;
     use \CException as Exception;
-    use \application\components\ActiveRecord;
+    use \application\components\ActiveRecord as CActiveRecord;
 
 /**
- * This is the model class for table "races".
+ * This is the model class for table "items".
  *
- * The followings are the available columns in table 'races':
+ * The followings are the available columns in table 'items':
  * @property integer $id
  * @property string $name
- * @property integer $start
- * @property integer $end
- * @property integer $winner
+ * @property integer $zybez_id
+ * @property string $zybez_search
+ * @property string $image
+ * @property double $average
+ * @property double $high
+ * @property double $low
+ * @property integer $updated
  * @property integer $created
- * @property integer $extra
+ *
+ * The followings are the available model relations:
+ * @property ItemHistory[] $itemHistories
  */
-class Races extends ActiveRecord
+class Items extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'races';
+		return 'items';
 	}
 
 	/**
@@ -36,12 +42,15 @@ class Races extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('created', 'required'),
-			array('start, end, winner, created, extra', 'numerical', 'integerOnly'=>true),
+			array('zybez_search', 'required'),
+			array('zybez_id, updated, created', 'numerical', 'integerOnly'=>true),
+			array('average, high, low', 'numerical'),
 			array('name', 'length', 'max'=>128),
+			array('zybez_search', 'length', 'max'=>256),
+			array('image', 'length', 'max'=>512),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, start, end, winner, created, extra', 'safe', 'on'=>'search'),
+			array('id, name, zybez_id, zybez_search, image, average, high, low, updated, created', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +62,7 @@ class Races extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'History' => array(self::HAS_MANY, '\\application\\models\\db\\ItemHistory', 'item'),
 		);
 	}
 
@@ -64,11 +74,14 @@ class Races extends ActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'start' => 'Start',
-			'end' => 'End',
-			'winner' => 'Winner',
+			'zybez_id' => 'Zybez',
+			'zybez_search' => 'Zybez Search',
+			'image' => 'Image',
+			'average' => 'Average',
+			'high' => 'High',
+			'low' => 'Low',
+			'updated' => 'Updated',
 			'created' => 'Created',
-			'extra' => 'Extra',
 		);
 	}
 
@@ -92,11 +105,14 @@ class Races extends ActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('start',$this->start);
-		$criteria->compare('end',$this->end);
-		$criteria->compare('winner',$this->winner);
+		$criteria->compare('zybez_id',$this->zybez_id);
+		$criteria->compare('zybez_search',$this->zybez_search,true);
+		$criteria->compare('image',$this->image,true);
+		$criteria->compare('average',$this->average);
+		$criteria->compare('high',$this->high);
+		$criteria->compare('low',$this->low);
+		$criteria->compare('updated',$this->updated);
 		$criteria->compare('created',$this->created);
-		$criteria->compare('extra',$this->extra);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -107,7 +123,7 @@ class Races extends ActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Races the static model class
+	 * @return Items the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
