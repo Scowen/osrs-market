@@ -153,7 +153,7 @@
                     'secure'    => false,
                     'httponly'  => true,
                 ),
-                'serializer' => 'php_binary',
+                //'serializer' => 'php_binary',
                 'sessionName' => 'system60',
                 'sessionTableName' => '{{sessions}}',
                 'timeout' => 64800,
